@@ -1,0 +1,110 @@
+/* Main container styling */
+.chatbot-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f6f8;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Title styling */
+  .chatbot-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Chat display area styling */
+  .chat-display {
+    width: 100%;
+    max-width: 600px;
+    height: 60vh;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Message styling */
+  .chat-message {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+  
+  .user-message {
+    align-self: flex-end;
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px 10px 0 10px;
+  }
+  
+  .bot-message {
+    align-self: flex-start;
+    background-color: #e9ecef;
+    color: #333;
+    border-radius: 10px 10px 10px 0;
+  }
+  
+  /* Input area styling */
+  .input-area {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+  }
+  
+  .chat-input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 10px 0 0 10px;
+    outline: none;
+  }
+  
+  .send-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .send-button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  /* Back button styling */
+  .back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .back-button:hover {
+    background-color: #0056b3;
+  }

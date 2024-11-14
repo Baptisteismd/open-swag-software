@@ -1,0 +1,29 @@
+/* Main wrapper for the homepage */
+.home-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centers vertically */
+    height: 100vh; /* Full viewport height */
+    padding: 0px 20px;
+    background-color: #f4f6f8;
+  }
+  
+  /* Title styling */
+  .home-title {
+    font-size: 32px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  /* Container for the buttons */
+  .home-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
