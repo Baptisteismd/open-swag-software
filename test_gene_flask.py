@@ -7,7 +7,8 @@ from flask_cors import CORS  # Importer flask-cors
 app = Flask(__name__)
 
 # Activer CORS pour toutes les routes
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/generate": {"origins": "http://localhost:3000"}})
+
 
 # Fonction pour générer du texte avec ollama
 def generer_texte(prompt):
@@ -30,13 +31,24 @@ def charger_conversations():
     nom_fichier = "conversations.json"
     if os.path.exists(nom_fichier):
         with open(nom_fichier, 'r') as fichier:
-            return json.load(fichier)
-    return {}
+            try:
+                return json.load(fichier)
+            except json.JSONDecodeError:
+                print(f"Warning: {nom_fichier} is empty or invalid. Initializing as an empty dictionary.")
+                return {}  # Return an empty dictionary if the file is empty or invalid
+    return {}  # Return an empty dictionary if the file doesn't exist
+
 
 def sauvegarder_conversations(conversations):
     nom_fichier = "conversations.json"
     with open(nom_fichier, 'w') as fichier:
         json.dump(conversations, fichier, indent=4)
+
+    # Ensure the file is created during initialization
+    if not os.path.exists(nom_fichier):
+        with open(nom_fichier, 'w') as fichier:
+            fichier.write("{}")
+
 
 # API Flask pour générer une réponse
 @app.route('/generate', methods=['POST'])
