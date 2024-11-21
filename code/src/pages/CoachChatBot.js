@@ -1,24 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ChatBot.css';
 import { useNavigate } from 'react-router-dom';
 
 const CoachChatBot = () => {
   const navigate = useNavigate();
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState([]); // Historique des messages
+  const [input, setInput] = useState(''); // Contenu de l'input
+  const chatDisplayRef = useRef(null); // Référence pour le défilement
 
-  const handleSendMessage = () => {
+  // Défilement automatique vers le bas
+  useEffect(() => {
+    if (chatDisplayRef.current) {
+      chatDisplayRef.current.scrollTop = chatDisplayRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  // Fonction pour envoyer un message à l'API Flask
+  const handleSendMessage = async () => {
     if (input.trim()) {
+      // Ajouter le message utilisateur
       setMessages([...messages, { text: input, user: true }]);
-      setInput('');
-      
-      // Mock response from the chatbot
-      setTimeout(() => {
-        setMessages(prevMessages => [
+      setInput(''); // Réinitialiser le champ input
+
+      try {
+        // Requête POST vers Flask
+        const response = await fetch('http://127.0.0.1:5000/generate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            role: 'Coach', // Rôle ou contexte du bot
+            prompt: input,
+          }),
+        });
+
+        const data = await response.json();
+
+        // Ajouter la réponse du bot
+        if (data.response) {
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { text: data.response, user: false },
+          ]);
+        } else if (data.error) {
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { text: 'Error: ' + data.error, user: false },
+          ]);
+        }
+      } catch (error) {
+        // Gérer les erreurs de connexion
+        setMessages((prevMessages) => [
           ...prevMessages,
-          { text: "I'm here to help you!", user: false },
+          { text: 'Error: Unable to connect to the server.', user: false },
         ]);
-      }, 1000);
+      }
+    }
+  };
+
+  // Gestion de la touche "Entrée" pour envoyer un message
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSendMessage();
     }
   };
 
@@ -28,7 +72,7 @@ const CoachChatBot = () => {
         Back to Homepage
       </button>
       <h1 className="chatbot-title">CoachChatBot</h1>
-      <div className="chat-display">
+      <div className="chat-display" ref={chatDisplayRef}>
         {messages.map((msg, index) => (
           <div
             key={index}
@@ -43,10 +87,15 @@ const CoachChatBot = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyPress={handleKeyPress}
           placeholder="Type your message..."
           className="chat-input"
         />
-        <button onClick={handleSendMessage} className="send-button">
+        <button
+          onClick={handleSendMessage}
+          className="send-button"
+          disabled={!input.trim()} // Désactiver le bouton si le champ est vide
+        >
           Send
         </button>
       </div>
@@ -55,4 +104,3 @@ const CoachChatBot = () => {
 };
 
 export default CoachChatBot;
-

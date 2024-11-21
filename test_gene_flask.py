@@ -2,8 +2,12 @@ import json
 import os
 import ollama
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Importer flask-cors
 
 app = Flask(__name__)
+
+# Activer CORS pour toutes les routes
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Fonction pour générer du texte avec ollama
 def generer_texte(prompt):
@@ -22,15 +26,17 @@ def generer_texte(prompt):
         return None
 
 # Charger et sauvegarder les conversations
-def charger_conversation(nom_fichier):
+def charger_conversations():
+    nom_fichier = "conversations.json"
     if os.path.exists(nom_fichier):
         with open(nom_fichier, 'r') as fichier:
             return json.load(fichier)
-    return []
+    return {}
 
-def sauvegarder_conversation(nom_fichier, conversation):
+def sauvegarder_conversations(conversations):
+    nom_fichier = "conversations.json"
     with open(nom_fichier, 'w') as fichier:
-        json.dump(conversation, fichier, indent=4)
+        json.dump(conversations, fichier, indent=4)
 
 # API Flask pour générer une réponse
 @app.route('/generate', methods=['POST'])
@@ -40,21 +46,26 @@ def generate_response():
     # Récupérer les données de la requête
     role = data.get('role', '').lower()
     prompt = data.get('prompt', '')
+    discussion_id = str(data.get('discussion_id', 'default'))
 
     # Configuration des rôles et des directives
     roles_directives = {
-        "prof de philo": "En tant que professeur de philosophie, vous devez répondre de manière introspective et encourager la réflexion. En 30 mots maximum",
-        "conseiller en carrière": "En tant que conseiller en carrière, fournissez des conseils pratiques pour la planification de carrière. En 30 mots maximum",
-        "assistant personnel": "En tant qu'assistant personnel, répondez de manière concise pour organiser la vie quotidienne. En 30 mots maximum"
+        "Coach": "As a coach, you must motivate and encourage individuals to achieve their personal or professional goals. Provide practical and inspiring advice. Limit your response to 30 words.",
+        "Teacher": "As a teacher, you must explain concepts clearly and pedagogically while encouraging curiosity and learning. Adapt your responses to the user's level of understanding. Limit your response to 30 words.",
+        "Friend": "As a friend, be empathetic and supportive. Provide advice or emotional support while remaining warm and understanding. Respond as a close and trusted friend. Limit your response to 30 words."
     }
 
     directive = roles_directives.get(role, "Je suis votre assistant virtuel, prêt à répondre à vos questions.")
     
-    # Charger le contexte des conversations précédentes
-    nom_fichier = "conversation.json"
-    conversation = charger_conversation(nom_fichier)
+    # Charger les conversations existantes
+    conversations = charger_conversations()
+
+    # Initialiser la discussion si elle n'existe pas
+    if discussion_id not in conversations:
+        conversations[discussion_id] = []
 
     # Créer un contexte avec les échanges précédents (dernier 5)
+    conversation = conversations[discussion_id]
     contexte = "\n".join(
         [f"Question: {e['question']}\nRéponse: {e['response']}" for e in conversation[-5:]]
     )
@@ -66,10 +77,11 @@ def generate_response():
     if response_text:
         # Ajouter l'échange dans la conversation
         conversation.append({"question": prompt, "response": response_text})
-        sauvegarder_conversation(nom_fichier, conversation)
+        conversations[discussion_id] = conversation
+        sauvegarder_conversations(conversations)
 
         # Retourner la réponse
-        return jsonify({"role": role, "response": response_text})
+        return jsonify({"discussion_id": discussion_id, "role": role, "response": response_text})
     else:
         return jsonify({"error": "Erreur lors de la génération du texte"}), 500
 
