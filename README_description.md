@@ -1,3 +1,4 @@
+# Margaux tu préviens quand tu modifies le rapport, **tu le fais avec Hugo ou tu le laisses faire sinon**, c'est une tâche assignée pour **2 PERSONNES**
 # Open Source Software project : MetAI Reader
 
 ## 1. Introduction 
