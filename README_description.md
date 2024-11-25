@@ -1,120 +1,144 @@
-
-# Open Source Software project : MetAI Reader
-
-# 1. Introduction
-
-## 1.1. Presentation of our project
-IA Reader is an interactive artificial intelligence application designed to provide a personalized and immersive user experience. Combining advanced text generation capabilities, a graphical user interface in Java, and voice synthesis, IA Reader enables users to interact naturally with the AI. 
-
-The unique aspect of IA Reader is its ability to adapt responses based on the role chosen by the user, making the interaction more tailored and engaging.
-
-## 1.2. Our objectives
-The main objectives of this project are:
-1. To create an AI that delivers contextually relevant and role-specific responses.
-2. To enhance the naturalness of human-machine interactions using voice synthesis.
-3. To provide users with a flexible, easy-to-use interface for selecting roles and interacting with the chatbot.
+# 🌟 Open Source Software Project: MetAI Reader 🌟
 
 ---
 
-# 2. Content
+## 1️⃣ Introduction  
 
-## 2.1. Tasks for each member
-The project was developed by a team of four members, each contributing their expertise to specific aspects:
-- **Hugo**: Coordinated the integration of the chatbot's voice synthesis and managed project documentation.
-- **Baptiste**: Focused on configuring and optimizing the generative AI backend using Flask.
-- **Théo Koehler**: Developed the Java-based user interface for role selection and interaction.
-- **Margaux Girona**: Worked on linking the generative AI with the user interface and managing conversation persistence.
+### 1.1. 📖 Presentation of our project  
+**IA Reader** is a cutting-edge interactive artificial intelligence application designed to deliver a personalized and immersive user experience.  
+Combining:
+- 🧠 **Advanced AI for text generation**,  
+- 🖥️ **A Java-based graphical user interface**,  
+- 🎙️ **Voice synthesis for natural interactions**,  
 
-## 2.2. Implementation of the generative AI
-The backend leverages the `llama3.2:3b` model integrated via the `ollama` library. This model generates coherent and contextually appropriate responses for each query. Key implementation details:
-- The Flask API processes user input, including the selected role and question.
-- Context is maintained by referencing the last five exchanges stored in a JSON file.
-- Role-specific directives guide the tone and content of the AI's responses.
+IA Reader empowers users to engage with AI in a way that feels intuitive and tailored to their needs.  
+Its unique twist? Users can **choose a role**, and the AI adjusts its responses and tone accordingly, making the experience dynamic and engaging!  
 
-## 2.3. Implementation of the voices for each personality
-To enhance the user experience, voice synthesis was added for each personality:
-- **Friend**: A friendly, relaxed tone to foster casual conversations.
-- **Girlfriend**: A warm, empathetic voice for supportive interactions.
-- **Coach**: A motivational and confident tone to inspire and guide.
-
-The voices were configured to align with the personalities, creating a cohesive user experience.
-
-## 2.4. Configuration of the user's interface (chatbot)
-The user interface was developed in Java to ensure:
-- A clean and intuitive design for selecting roles.
-- A seamless interaction process where users can ask questions and receive responses.
-- Real-time voice playback of the AI’s answers.
-
-## 2.5. Link between the generative AI's implementation and the chatbot
-The connection between the backend (generative AI) and the chatbot interface was established as follows:
-- User input from the Java-based interface is sent to the Flask API.
-- The API processes the input, queries the AI model, and returns the response.
-- The response is displayed on the interface and played back using voice synthesis.
-- Previous conversations are retrieved from and stored in a shared JSON file to maintain context.
+### 1.2. 🎯 Our Objectives  
+Our project aimed to achieve the following:
+1. Create an AI that delivers **role-specific, contextually relevant responses**.  
+2. **Humanize the interaction** using natural voice synthesis.  
+3. Provide users with a **flexible, intuitive interface** to interact seamlessly with the chatbot.  
 
 ---
 
-# 3. Technical Features
+## 2️⃣ Content  
 
-### 3.1 Flask-based Backend
-- Processes user requests and generates responses with role-specific directives.
+### 2.1. 👥 Tasks for each member  
+Each member of our team contributed their expertise to specific aspects of the project:  
+- **Hugo Visarak**: 🎙️ Integrated voice synthesis into the chatbot and ensured detailed project documentation.  
+- **Baptiste**: 🧑‍💻 Optimized the backend using Flask and configured the AI responses.  
+- **Théo Koehler**: 🖥️ Developed the sleek Java-based interface for role selection and user interaction.  
+- **Margaux Girona**: 🔗 Bridged the generative AI with the chatbot interface and ensured conversation continuity.  
 
-### 3.2 AI Model Integration
-- Integrates the `llama3.2:3b` model using the `ollama` library.
+### 2.2. 🧠 Implementation of the generative AI  
+The heart of our system is the **`llama3.2:3b` model**, integrated via the `ollama` library.  
+- 🔄 **Flask API** manages user input (role + question) and provides AI-generated responses.  
+- 💾 **JSON** stores the last five exchanges for a conversational flow.  
+- 🎭 Role-specific directives ensure responses are aligned with the user’s choice.  
 
-### 3.3 Conversation Persistence
-- Stores user conversations in a JSON file (`conversation.json`).
+### 2.3. 🎙️ Voice Synthesis for Personalities  
+We introduced **voice synthesis** to bring each role to life:  
+- **Friend** 🤗: Your supportive buddy, always ready to chat casually and make things fun.  
+- **Girlfriend** 💕: A caring and empathetic partner for emotional, understanding conversations.  
+- **Coach** 🏋️‍♂️: Your motivator, offering practical advice and a push toward your goals!  
 
-### 3.4 Custom Directives
-- Guides the tone and content of responses for each personality.
+Each voice was tailored to match the personality, making the interaction feel natural and relatable.  
 
-### 3.5 Error Management
-- Ensures smooth execution by handling errors during model interaction.
+### 2.4. 🖥️ User Interface Configuration  
+The interface was built in **Java** for:  
+- 🎨 A **clean and intuitive design** that lets users select their preferred role effortlessly.  
+- 💬 **Interactive chats** where questions are answered in real-time.  
+- 🔊 Integration with **voice playback** for auditory responses.  
 
----
-
-# 4. Technologies Used
-- **Python (Flask)**: Backend and API management.
-- **`ollama` Library**: AI model integration.
-- **Java**: User interface development.
-- **JSON**: Conversation history storage.
-
----
-
-# 5. Development Process
-
-### 5.1 Backend Design and Development
-- Created a Flask API to handle user requests and manage context.
-
-### 5.2 Graphical Interface Creation in Java
-- Developed an intuitive interface for role selection and interaction.
-
-### 5.3 Testing and Optimization
-- Validated the coherence of responses and ensured efficient conversation storage.
+### 2.5. 🔗 Connecting Generative AI and the Interface  
+The integration of the backend AI with the user-facing chatbot involved:  
+1. Sending user inputs from the Java interface to the Flask API.  
+2. Generating role-specific responses via the AI model.  
+3. Returning the response to the interface for display and voice playback.  
+4. Updating and storing conversation history in a shared **JSON file**.  
 
 ---
 
-# 6. Team
-This project was developed by:
-- **Margaux**
-- **Baptiste**
-- **Hugo**
-- **Théo**
+## 3️⃣ Technical Features  
 
-Each member contributed to the project's design, development, and optimization.
+### 🚀 Backend  
+- **Flask-based API** to handle user requests and manage context.  
+
+### 🤖 AI Model  
+- Integration of the `llama3.2:3b` model via `ollama`, with custom role-specific directives.  
+
+### 💾 Conversation Persistence  
+- JSON file (`conversation.json`) for storing user exchanges and maintaining context.  
+
+### 🎭 Role-Specific Responses  
+- Predefined instructions guide the tone and style of responses for each role.  
+
+### ⚙️ Error Handling  
+- Robust mechanisms for smooth execution and debugging.  
 
 ---
 
-# 7. Conclusion
-IA Reader exemplifies a collaborative effort to innovate human-machine interactions. By integrating voice synthesis, role-specific directives, and advanced AI technology, we created a system that is both accessible and user-centric.
-We learned many things and saw the real power of tools like ChatGPT 😄
+## 4️⃣ Technologies Used  
 
-We hope this project inspires others to explore new possibilities in AI-powered conversational systems.
+### 🐍 Python (Flask)  
+- **API Management**: To process user input and interact with the AI.  
+- **Conversation History**: Managing user exchanges via JSON for a consistent experience.  
+
+### 🧠 AI Model Integration  
+- The `ollama` library integrates **`llama3.2:3b`** for intelligent, context-aware responses.  
+
+### 🔊 Voice Synthesis  
+- Adds personality and accessibility by generating **role-specific voices**.  
+
+### ☕ Java  
+- Developed a **sleek, responsive interface** for interaction and role selection.  
+
+### 💾 JSON  
+- **Stores user conversations** for continuity and context.  
+
+### 🛠️ Collaboration Tools  
+- **Git & GitHub**: For seamless version control.  
+- **Spyder, PyCharm, IntelliJ/Eclipse**: For debugging and optimizing the backend and UI.  
+
+---
+
+## 5️⃣ Development Process  
+
+### Backend Design  
+- Developed a **Flask API** to process user requests and maintain conversation context.  
+
+### Graphical Interface  
+- Created an **interactive Java UI** for role selection and chat visualization.  
+
+### Testing & Optimization  
+- Tested responses for coherence, continuity, and role accuracy.  
+
+---
+
+## 6️⃣ Meet the Team 👩‍💻👨‍💻  
+- **Margaux Girona**  
+- **Baptiste**  
+- **Hugo Visarak**  
+- **Théo Koehler**  
+
+💪 Together, we designed, built, and refined **MetAI Reader** to deliver an innovative experience.  
+
+---
+
+## 7️⃣ Conclusion 💡  
+**MetAI Reader** reflects our passion for creating **human-like interactions** with AI.  
+By integrating **voice synthesis, customizable personalities**, and **advanced generative AI**, we’ve crafted a system that is both accessible and engaging.  
+This project taught us the importance of collaboration, problem-solving, and the power of AI tools to enhance everyday interactions.  
+
+🔗 **Stay curious and keep innovating!**
+
+---
+
+## 8️⃣ Simulation of our Interface 🎥  
+👉 *Video demo to be added soon!*
 
 
-# 8. Simulation of our interface
-- Video to do of our chatbot simlulation
-  
 
 
 [about pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
