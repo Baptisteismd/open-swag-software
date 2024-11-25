@@ -39,9 +39,9 @@ The heart of our system is the **`llama3.2:3b` model**, integrated via the `olla
 
 ### 2.3. 🎙️ Voice Synthesis for Personalities  
 We introduced **voice synthesis** to bring each role to life:  
-- **Friend** 🤗: Your supportive buddy, always ready to chat casually and make things fun.  
-- **Girlfriend** 💕: A caring and empathetic partner for emotional, understanding conversations.  
-- **Coach** 🏋️‍♂️: Your motivator, offering practical advice and a push toward your goals!  
+- **Friend** 🤗: Your supportive buddy, always ready to chat and to make jokes.
+- **Girlfriend** 💕: A caring and empathetic partner.  
+- **Coach** 🏋️‍♂️: A motivator, offering practical advice and a push toward your goals!  
 
 Each voice was tailored to match the personality, making the interaction feel natural and relatable.  
 
@@ -122,16 +122,12 @@ The integration of the backend AI with the user-facing chatbot involved:
 - **Hugo Visarak**  
 - **Théo Koehler**  
 
-💪 Together, we designed, built, and refined **MetAI Reader** to deliver an innovative experience.  
-
 ---
 
 ## 7️⃣ Conclusion 💡  
 **MetAI Reader** reflects our passion for creating **human-like interactions** with AI.  
 By integrating **voice synthesis, customizable personalities**, and **advanced generative AI**, we’ve crafted a system that is both accessible and engaging.  
 This project taught us the importance of collaboration, problem-solving, and the power of AI tools to enhance everyday interactions.  
-
-🔗 **Stay curious and keep innovating!**
 
 ---
 
