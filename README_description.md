@@ -26,7 +26,7 @@ Our project aimed to achieve the following:
 
 ### 2.1. 👥 Tasks for each member  
 Each member of our team contributed their expertise to specific aspects of the project:  
-- **Hugo Visarak**: 🎙️ Integrated voice synthesis into the chatbot and ensured detailed project documentation.  
+- **Hugo Virasak**: 🎙️ Integrated voice synthesis into the chatbot and ensured detailed project documentation.  
 - **Baptiste**: 🧑‍💻 Optimized the backend using Flask and configured the AI responses.  
 - **Théo Koehler**: 🖥️ Developed the sleek Java-based interface for role selection and user interaction.  
 - **Margaux Girona**: 🔗 Bridged the generative AI with the chatbot interface and ensured conversation continuity.  
@@ -119,7 +119,7 @@ The integration of the backend AI with the user-facing chatbot involved:
 ## 6️⃣ Meet the Team 👩‍💻👨‍💻  
 - **Margaux Girona**  
 - **Baptiste**  
-- **Hugo Visarak**  
+- **Hugo Virasak**  
 - **Théo Koehler**  
 
 ---
