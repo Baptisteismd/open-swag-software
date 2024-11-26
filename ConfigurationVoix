@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech with Voice Selection</title>
+</head>
+<body>
+    <h1>Text-to-Speech: Choose a Voice</h1>
+    <textarea id="text" rows="5" cols="40" placeholder="Type something to speak..."></textarea><br>
+
+    <!-- Dropdown to select a specific voice -->
+    <label for="voiceSelect">Choose a voice:</label>
+    <select id="voiceSelect">
+        <option value="">Loading voices...</option>
+    </select><br><br>
+
+    <!-- Dropdown to filter by language -->
+    <label for="languageSelect">Choose a language:</label>
+    <select id="languageSelect">
+        <option value="all">All Languages</option>
+        <option value="en-US">English (US)</option>
+        <option value="en-GB">English (UK)</option>
+        <option value="fr-FR">French</option>
+        <option value="es-ES">Spanish</option>
+        <option value="de-DE">German</option>
+        <option value="it-IT">Italian</option>
+        <option value="ko-KR">Korean</option>
+    </select><br><br>
+
+    <button id="speakButton">Speak</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const synth = window.speechSynthesis;
+            const voiceSelect = document.getElementById('voiceSelect');
+            const languageSelect = document.getElementById('languageSelect');
+            let voices = [];
+
+            // Populate the dropdown with available voices
+            const loadVoices = () => {
+                voices = synth.getVoices();
+                populateVoiceList();
+            };
+
+            const populateVoiceList = () => {
+                // Clear existing options
+                voiceSelect.innerHTML = '';
+
+                // Get selected language
+                const selectedLanguage = languageSelect.value;
+
+                // Add each voice as an option
+                voices.forEach((voice, index) => {
+                    if (selectedLanguage === "all" || voice.lang === selectedLanguage) {
+                        const option = document.createElement('option');
+                        option.value = index; // Use index to reference the voice
+                        option.textContent = `${voice.name} (${voice.lang})${voice.default ? ' [Default]' : ''}`;
+                        voiceSelect.appendChild(option);
+                    }
+                });
+
+                // Show a message if no voices match the language filter
+                if (!voiceSelect.options.length) {
+                    const noVoiceOption = document.createElement('option');
+                    noVoiceOption.textContent = 'No voices available for the selected language';
+                    voiceSelect.appendChild(noVoiceOption);
+                }
+            };
+
+            loadVoices();
+            if (synth.onvoiceschanged !== undefined) {
+                synth.onvoiceschanged = loadVoices;
+            }
+
+            // Update voice list when language filter changes
+            languageSelect.addEventListener('change', populateVoiceList);
+
+            // Speak the text with the selected voice
+            document.getElementById('speakButton').addEventListener('click', () => {
+                const text = document.getElementById('text').value.trim();
+                const selectedVoiceIndex = voiceSelect.value;
+
+                if (!text) {
+                    alert("Please type some text.");
+                    return;
+                }
+
+                if (!selectedVoiceIndex) {
+                    alert("Please select a voice.");
+                    return;
+                }
+
+                const utterance = new SpeechSynthesisUtterance(text);
+
+                // Set the selected voice
+                const selectedVoice = voices[selectedVoiceIndex];
+                if (selectedVoice) {
+                    utterance.voice = selectedVoice;
+                }
+
+                utterance.pitch = 1; // Normal pitch
+                utterance.rate = 1;  // Normal rate
+
+                // Speak the text
+                synth.speak(utterance);
+            });
+        });
+    </script>
+</body>
+</html>
