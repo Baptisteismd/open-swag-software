@@ -9,14 +9,12 @@
     <h1>Dynamic Voice Profiles: Friend, Teacher, Coach</h1>
     <p id="outputText"></p>
 
-    <!-- Dropdown to filter by language -->
+    <!-- Dropdown to filter by language --> 
     <label for="languageSelect">Choose a language:</label>
     <select id="languageSelect">
-        <option value="en-US">English (US)</option>
+        <option value="en-US">English (US)</option>  
         <option value="en-GB">English (UK)</option>
         <option value="fr-FR">French</option>
-        <option value="es-ES">Spanish</option>
-        <option value="de-DE">German</option>
         <option value="ko-KR">Korean</option>
     </select><br><br>
 
@@ -39,34 +37,52 @@
             const outputText = document.getElementById('outputText');
             let voices = [];
 
-            const inputString = "Hello! I am your AI assitant, please select the voice you want to hear !"; // Text to convert into speech
+            const inputString = "안녕하세요, 저는 여러분의 AI 어시스턴트이며 친구라고 소개해드리고 싶습니다. ! "; // Text to convert into speech
             outputText.textContent = `Text to Speak: "${inputString}"`;
 
             const loadVoices = () => {
                 voices = synth.getVoices();
             };
 
-            const selectVoiceByLanguage = (lang) => {
-                // Find a voice matching the language
+            const selectVoiceByProfile = (lang, profile) => {
+                // Find voices matching the language
                 const filteredVoices = voices.filter(voice => voice.lang === lang);
-                return (
-                    filteredVoices[0] || // Pick the first available voice in the selected language
-                    voices.find(voice => voice.lang.startsWith(lang.split('-')[0])) || // Fallback to a broader language family
-                    voices[0] // Fallback to the first available voice
-                );
+
+                if (!filteredVoices.length) return null; // No matching voices
+
+                switch (profile) {
+                    case 'friend': // Young Friend
+                        return filteredVoices.find(voice => 
+                            voice.name.toLowerCase().includes('young') || 
+                            voice.name.toLowerCase().includes('female') ||
+                            voice.name.toLowerCase().includes('male')
+                        ) || filteredVoices[0];
+                    case 'teacher': // Teacher
+                        return filteredVoices.find(voice => 
+                            voice.name.toLowerCase().includes('teacher') || 
+                            voice.name.toLowerCase().includes('calm')
+                        ) || filteredVoices[0];
+                    case 'coach': // Coach
+                        return filteredVoices.find(voice => 
+                            voice.name.toLowerCase().includes('coach') || 
+                            voice.name.toLowerCase().includes('energetic')
+                        ) || filteredVoices[0];
+                    default:
+                        return filteredVoices[0];
+                }
             };
 
             const getVoiceSettings = (profile) => {
                 // Return settings for the selected voice profile
                 switch (profile) {
                     case 'friend':
-                        return { pitch: 1.2, rate: 1.0 }; // Youthful tone
+                        return { pitch: 1.3, rate: 1.5 }; // Youthful tone
                     case 'teacher':
-                        return { pitch: 1.0, rate: 0.9 }; // Calm and deliberate tone
+                        return { pitch: 0.2, rate: 0.9 }; // Calm and deliberate tone
                     case 'coach':
-                        return { pitch: 1.1, rate: 1.3 }; // Motivational and energetic tone
+                        return { pitch: 5.0, rate: 1.5 }; // Motivational and energetic tone
                     default:
-                        return { pitch: 1.0, rate: 1.0 }; // Default settings
+                        return { pitch: 5.0, rate: 1.9 }; // Default settings
                 }
             };
 
@@ -78,7 +94,7 @@
 
                 const selectedLanguage = languageSelect.value;
                 const selectedProfile = profileSelect.value;
-                const voice = selectVoiceByLanguage(selectedLanguage);
+                const voice = selectVoiceByProfile(selectedLanguage, selectedProfile);
 
                 if (!voice) {
                     alert(`No suitable voice found for language: ${selectedLanguage}`);
