@@ -43,6 +43,10 @@ const CoachChatBot = () => {
             ...prevMessages,
             { text: data.response, user: false },
           ]);
+
+          // nouvelle ligne : déclencher le text-to-speech pour la réponse du coach
+          speakCoachResponse(data.response);
+
         } else if (data.error) {
           setMessages((prevMessages) => [
             ...prevMessages,
@@ -50,11 +54,14 @@ const CoachChatBot = () => {
           ]);
         }
       } catch (error) {
-        // Gérer les erreurs de connexion
+        // Gérer les erreurs de connexion et variable errorMessage ajouté pour éviter la répétition du message.
+        const errorMessage = '오류가 발생했습니다: 서버에 연결할 수 없습니다.'//'connexion sans succès' //Error: Unable to connect to the server.
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: 'Error: Unable to connect to the server.', user: false },
+          { text: errorMessage, user: false }, 
         ]);
+        // Nouvelle ligne ajoutée pour tester la voix en cas d'erreur : Speak the error message
+        speakCoachResponse(errorMessage); 
       }
     }
   };
@@ -66,6 +73,49 @@ const CoachChatBot = () => {
     }
   };
 
+  // nouvelles fonctions pour le text-to-speech
+  
+  // fonction pour détecter la langue utilisée par la réponse générée
+  const detectLanguage = (text) => 
+  {
+    if (/[\u3131-\uD79D]/.test(text)) return 'ko-KR'; // pour reconnaître le coréen
+    if (/\b(le|la|les|un|une|des|je|tu|il|elle|nous|vous|ils|elles|et|est|sont|pas|pour|avec|sans|cette|cela|ceci|au|aux|du|de|que|qui|où|quoi|quand|comment|parce|mais|ou|donc|or|ni|car|bientôt|fête|bonjour|merci|ça)\b|[àâçéèêëîïôûùüÿæœ]/i.test(text)) {
+      return 'fr-FR';}
+  // pour reconnaître le français
+    return 'en-US'; // s'il n'y a d'autres langues configurées, mettons l'anglais par défaut
+  }
+  // fonction text-to-speech (TTS) pour la voix du coach
+  const speakCoachResponse = (text) => {
+    const synth = window.speechSynthesis;
+    const lang = detectLanguage(text); // appel de la fonction detectLanguage
+
+    const loadAndSpeak = () => {
+      const voices = synth.getVoices();
+
+      if (!voices.length) {
+          setTimeout(loadAndSpeak, 100); // Retry after 100ms if voices are not loaded
+          return;
+      }
+
+      // Filter voices by language and characteristics
+      const coachVoice = voices.find(
+          (voice) => voice.lang === lang && 
+                     (voice.name.toLowerCase().includes('coach') || 
+                      voice.name.toLowerCase().includes('energetic'))
+      ) || voices.find(voice => voice.lang === lang) || voices[0]; // Fallback voice
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = coachVoice;
+      utterance.pitch = 5.0;  // High pitch for motivation
+      utterance.rate = 1.5;   // Faster rate for dynamic tone
+
+      synth.speak(utterance);
+  };
+
+  loadAndSpeak();
+  };
+
+  // code html
   return (
     <div className="chatbot-wrapper">
       <button onClick={() => navigate('/')} className="back-button">
