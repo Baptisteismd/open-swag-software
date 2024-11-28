@@ -1,139 +1,103 @@
-# 🌟 Open Source Software Project: MetAI Reader 🌟
+# **MetAI Reader** 🌟  
+### **An Interactive and Immersive AI Application**  
+
+MetAI Reader is an innovative artificial intelligence application designed to offer a personalized and engaging user experience. It leverages cutting-edge technologies to allow users to interact with the AI naturally. Through a user-friendly interface and immersive voice synthesis, MetAI Reader adapts its responses based on the role chosen by the user, making every interaction unique and dynamic.  
 
 ---
 
-## 1️⃣ Introduction  
-
-### 1.1. 📖 Presentation of our project  
-**IA Reader** is a cutting-edge interactive artificial intelligence application designed to deliver a personalized and immersive user experience.  
-Combining:
-- 🧠 **Advanced AI for text generation**,  
-- 🖥️ **A Java-based graphical user interface**,  
-- 🎙️ **Voice synthesis for natural interactions**,  
-
-IA Reader empowers users to engage with AI in a way that feels intuitive and tailored to their needs.  
-Its unique twist? Users can **choose a role**, and the AI adjusts its responses and tone accordingly, making the experience dynamic and engaging!  
-
-### 1.2. 🎯 Our Objectives  
-Our project aimed to achieve the following:
-1. Create an AI that delivers **role-specific, contextually relevant responses**.  
-2. **Humanize the interaction** using natural voice synthesis.  
-3. Provide users with a **flexible, intuitive interface** to interact seamlessly with the chatbot.  
+## **Objectives**  
+MetAI Reader aims to redefine human-AI interactions by creating a system that provides contextually relevant and role-adapted responses. By adding a human touch with voice synthesis, it enhances user accessibility while ensuring a simple and intuitive interface.  
 
 ---
 
-## 2️⃣ Content  
+## **Project Structure**  
+MetAI Reader consists of several interconnected modules:  
 
-### 2.1. 👥 Tasks for each member  
-Each member of our team contributed their expertise to specific aspects of the project:  
-- **Hugo Virasak**: 🎙️ Integrated voice synthesis into the chatbot and ensured detailed project documentation.  
-- **Baptiste**: 🧑‍💻 Optimized the backend using Flask and configured the AI responses.  
-- **Théo Koehler**: 🖥️ Developed the sleek Java-based interface for role selection and user interaction.  
-- **Margaux Girona**: 🔗 Bridged the generative AI with the chatbot interface and ensured conversation continuity.  
-
-### 2.2. 🧠 Implementation of the generative AI  
-The heart of our system is the **`llama3.2:3b` model**, integrated via the `ollama` library.  
-- 🔄 **Flask API** manages user input (role + question) and provides AI-generated responses.  
-- 💾 **JSON** stores the last five exchanges for a conversational flow.  
-- 🎭 Role-specific directives ensure responses are aligned with the user’s choice.  
-
-### 2.3. 🎙️ Voice Synthesis for Personalities  
-We introduced **voice synthesis** to bring each role to life:  
-- **Friend** 🤗: Your supportive buddy, always ready to chat and to make jokes.
-- **Girlfriend** 💕: A caring and empathetic partner.  
-- **Coach** 🏋️‍♂️: A motivator, offering practical advice and a push toward your goals!  
-
-Each voice was tailored to match the personality, making the interaction feel natural and relatable.  
-
-### 2.4. 🖥️ User Interface Configuration  
-The interface was built in **Java** for:  
-- 🎨 A **clean and intuitive design** that lets users select their preferred role effortlessly.  
-- 💬 **Interactive chats** where questions are answered in real-time.  
-- 🔊 Integration with **voice playback** for auditory responses.  
-
-### 2.5. 🔗 Connecting Generative AI and the Interface  
-The integration of the backend AI with the user-facing chatbot involved:  
-1. Sending user inputs from the Java interface to the Flask API.  
-2. Generating role-specific responses via the AI model.  
-3. Returning the response to the interface for display and voice playback.  
-4. Updating and storing conversation history in a shared **JSON file**.  
+### **Team Contributions**  
+- **Hugo Virasak**: Integrated voice synthesis and detailed project documentation.  
+- **Baptiste**: Optimized the backend with Flask and response generation.  
+- **Théo Koehler**: Designed the Java interface for seamless interaction.  
+- **Margaux Girona**: Worked on bridging the AI responses with the user interface for smooth conversational flow.  
 
 ---
 
-## 3️⃣ Technical Features  
+## **AI Functionality**  
+At its core, MetAI Reader uses the **llama3.2:3b** model via the Ollama library to handle user input and generate role-aligned responses.  
 
-### 🚀 Backend  
-- **Flask-based API** to handle user requests and manage context.  
+A Flask API acts as a central hub, managing communication between the graphical interface and the AI model while maintaining a JSON-based record of the last five exchanges to ensure contextual continuity.  
 
-### 🤖 AI Model  
-- Integration of the `llama3.2:3b` model via `ollama`, with custom role-specific directives.  
-
-### 💾 Conversation Persistence  
-- JSON file (`conversation.json`) for storing user exchanges and maintaining context.  
-
-### 🎭 Role-Specific Responses  
-- Predefined instructions guide the tone and style of responses for each role.  
-
-### ⚙️ Error Handling  
-- Robust mechanisms for smooth execution and debugging.  
+Each role (friend, girlfriend, coach) comes with predefined directives, allowing the AI to adopt the appropriate tone and style for each interaction.  
 
 ---
 
-## 4️⃣ Technologies Used  
-
-### 🐍 Python (Flask)  
-- **API Management**: To process user input and interact with the AI.  
-- **Conversation History**: Managing user exchanges via JSON for a consistent experience.  
-
-### 🧠 AI Model Integration  
-- The `ollama` library integrates **`llama3.2:3b`** for intelligent, context-aware responses.  
-
-### 🔊 Voice Synthesis  
-- Adds personality and accessibility by generating **role-specific voices**.  
-
-### ☕ Java  
-- Developed a **sleek, responsive interface** for interaction and role selection.  
-
-### 💾 JSON  
-- **Stores user conversations** for continuity and context.  
-
-### 🛠️ Collaboration Tools  
-- **Git & GitHub**: For seamless version control.  
-- **Spyder, PyCharm, IntelliJ/Eclipse**: For debugging and optimizing the backend and UI.  
+## **Voice Synthesis**  
+Voice synthesis adds an auditory dimension to the user experience, with tailored voices for each role:  
+- **Friend**: Warm and casual, ideal for friendly chats.  
+- **Girlfriend**: Empathetic and caring, suited for personal conversations.  
+- **Coach**: Motivational and direct, offering encouragement and advice.  
 
 ---
 
-## 5️⃣ Development Process  
+## **User Interface**  
+The Java-based graphical user interface (GUI) enables users to:  
+- Select roles easily.  
+- View conversations in real time.  
+- Listen to AI responses through voice synthesis.  
 
-### Backend Design  
-- Developed a **Flask API** to process user requests and maintain conversation context.  
-
-### Graphical Interface  
-- Created an **interactive Java UI** for role selection and chat visualization.  
-
-### Testing & Optimization  
-- Tested responses for coherence, continuity, and role accuracy.  
+Its clean, intuitive design ensures a smooth and enjoyable experience.  
 
 ---
 
-## 6️⃣ Meet the Team 👩‍💻👨‍💻  
-- **Margaux Girona**  
-- **Baptiste**  
-- **Hugo Virasak**  
-- **Théo Koehler**  
+## **Technical Architecture**  
+MetAI Reader is built on a robust and modular architecture to ensure extensibility and easy maintenance.  
+
+- **Flask Backend**: A lightweight Python framework that handles user requests, model interactions, and conversation context.  
+- **Ollama Library**: Simplifies interaction with the **llama3.2:3b** language model, enabling efficient and contextually relevant response generation.  
+- **JSON Conversation History**: Maintains a lightweight, easily manageable log of the last five exchanges to provide continuity.  
+- **Voice Synthesis**: Converts text responses into audio, making interactions more natural and accessible.  
+- **Java GUI**: Offers an interactive and intuitive platform for users to interact with the AI in real time.  
 
 ---
 
-## 7️⃣ Conclusion 💡  
-**MetAI Reader** reflects our passion for creating **human-like interactions** with AI.  
-By integrating **voice synthesis, customizable personalities**, and **advanced generative AI**, we’ve crafted a system that is both accessible and engaging.  
-This project taught us the importance of collaboration, problem-solving, and the power of AI tools to enhance everyday interactions.  
+## **Technologies Used**  
+MetAI Reader combines several modern and proven technologies:  
+
+### **Python (Flask)**  
+Flask, a lightweight web framework, powers the backend. It manages user requests, AI interactions, and conversation continuity, making it ideal for rapid development and integration.  
+
+### **Java**  
+Java powers the GUI, ensuring a stable and interactive user experience. Its robustness and extensive library support make it perfect for creating intuitive interfaces.  
+
+### **Ollama**  
+The Ollama library integrates advanced language models like **llama3.2:3b** seamlessly, generating accurate and context-aware responses efficiently.  
+
+### **JSON**  
+JSON stores conversation history, ensuring continuity between exchanges while maintaining a lightweight and fast data format.  
+
+### **Voice Synthesis**  
+This feature converts text into speech, enriching user interaction with personalized voices for each role.  
+
+### **Git & GitHub**  
+Git and GitHub manage source code, track changes, and facilitate team collaboration, ensuring version control and project transparency.  
+
+### **Development Environments**  
+Tools like Spyder and PyCharm support Python backend development, while IntelliJ and Eclipse streamline Java interface design and debugging.  
 
 ---
 
-## 8️⃣ Simulation of our Interface 🎥  
-👉 *Video demo to be added soon!*
+## **Development & Testing**  
+Development was divided into key phases:  
+1. Building the Flask backend for centralized interactions.  
+2. Designing the intuitive Java GUI.  
+3. Integrating the AI and UI for seamless two-way communication.  
+4. Testing and optimizing response relevance and interaction fluidity.  
 
+---
+
+## **Conclusion**  
+MetAI Reader demonstrates our vision for more human-like AI interactions. By combining personalized voice synthesis, an intuitive interface, and generative intelligence, this project illustrates how AI can enhance everyday life.  
+
+We hope MetAI Reader opens new possibilities for immersive and personalized AI interactions.
 
 
 
