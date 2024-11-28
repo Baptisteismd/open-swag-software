@@ -2,15 +2,14 @@ import json
 import os
 import ollama
 from flask import Flask, request, jsonify
-from flask_cors import CORS  # Importer flask-cors
+from flask_cors import CORS
 
 app = Flask(__name__)
 
-# Activer CORS pour toutes les routes
+# Enable CORS for specific routes
 CORS(app, resources={r"/generate": {"origins": "http://localhost:3000"}})
 
-
-# Fonction pour générer du texte avec ollama
+# Function to generate text using ollama
 def generer_texte(prompt):
     try:
         reponse = ollama.generate(
@@ -20,13 +19,13 @@ def generer_texte(prompt):
         if isinstance(reponse, dict) and 'response' in reponse:
             return reponse['response']
         else:
-            print("Erreur : 'response' introuvable dans la réponse.")
+            print("Error: 'response' not found in the reply.")
             return None
     except Exception as e:
-        print(f"Erreur lors de l'exécution du modèle : {str(e)}")
+        print(f"Error during model execution: {str(e)}")
         return None
 
-# Charger et sauvegarder les conversations
+# Load and save conversations
 def charger_conversations():
     nom_fichier = "conversations.json"
     if os.path.exists(nom_fichier):
@@ -38,64 +37,57 @@ def charger_conversations():
                 return {}  # Return an empty dictionary if the file is empty or invalid
     return {}  # Return an empty dictionary if the file doesn't exist
 
-
 def sauvegarder_conversations(conversations):
     nom_fichier = "conversations.json"
     with open(nom_fichier, 'w') as fichier:
         json.dump(conversations, fichier, indent=4)
 
-    # Ensure the file is created during initialization
-    if not os.path.exists(nom_fichier):
-        with open(nom_fichier, 'w') as fichier:
-            fichier.write("{}")
-
-
-# API Flask pour générer une réponse
+# API Flask to generate a response
 @app.route('/generate', methods=['POST'])
 def generate_response():
     data = request.get_json()
 
-    # Récupérer les données de la requête
+    # Retrieve data from the request
     role = data.get('role', '').lower()
     prompt = data.get('prompt', '')
     discussion_id = str(data.get('discussion_id', 'default'))
 
-    # Configuration des rôles et des directives
+    # Role-based instructions (in English)
     roles_directives = {
-        "Coach": "As a coach, you must motivate and encourage individuals to achieve their personal or professional goals. Provide practical and inspiring advice. Limit your response to 30 words.",
-        "Teacher": "As a teacher, you must explain concepts clearly and pedagogically while encouraging curiosity and learning. Adapt your responses to the user's level of understanding. Limit your response to 30 words.",
-        "Friend": "As a friend, be empathetic and supportive. Provide advice or emotional support while remaining warm and understanding. Respond as a close and trusted friend. Limit your response to 30 words."
+        "coach": "As a coach, motivate and encourage individuals to achieve their goals. Offer practical and inspiring advice. Limit your response to 30 words.",
+        "teacher": "As a teacher, explain concepts clearly and pedagogically while encouraging curiosity and learning. Tailor your responses to the user's level. Limit your response to 30 words.",
+        "friend": "As a friend, be empathetic and supportive. Offer advice or emotional support warmly and understandingly. Respond like a close and trusted friend. Limit your response to 30 words."
     }
 
-    directive = roles_directives.get(role, "Je suis votre assistant virtuel, prêt à répondre à vos questions.")
-    
-    # Charger les conversations existantes
+    directive = roles_directives.get(role, "I am your virtual assistant, ready to answer your questions.")
+
+    # Load existing conversations
     conversations = charger_conversations()
 
-    # Initialiser la discussion si elle n'existe pas
+    # Initialize the discussion if it doesn't exist
     if discussion_id not in conversations:
         conversations[discussion_id] = []
 
-    # Créer un contexte avec les échanges précédents (dernier 5)
+    # Create a context with the last 5 exchanges
     conversation = conversations[discussion_id]
     contexte = "\n".join(
-        [f"Question: {e['question']}\nRéponse: {e['response']}" for e in conversation[-5:]]
+        [f"Question: {e['question']}\nAnswer: {e['response']}" for e in conversation[-5:]]
     )
     texte_complet = f"{directive}\n{contexte}\nQuestion: {prompt}"
 
-    # Générer la réponse
+    # Generate the response
     response_text = generer_texte(texte_complet)
 
     if response_text:
-        # Ajouter l'échange dans la conversation
+        # Add the exchange to the conversation
         conversation.append({"question": prompt, "response": response_text})
         conversations[discussion_id] = conversation
         sauvegarder_conversations(conversations)
 
-        # Retourner la réponse
+        # Return the response
         return jsonify({"discussion_id": discussion_id, "role": role, "response": response_text})
     else:
-        return jsonify({"error": "Erreur lors de la génération du texte"}), 500
+        return jsonify({"error": "Error during text generation"}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)

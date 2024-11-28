@@ -1,8 +1,16 @@
 {
     "default": [
         {
-            "question": "hey",
-            "response": "Bonjour ! C'est nice de te voir ! Comment allez-vous aujourd'hui ? Quelle est la raison pour laquelle tu as besoin d'un assistant virtuel comme moi ? Je suis l\u00e0 pour t'aider !"
+            "question": "i m baptiste hello",
+            "response": "\"Hello Baptiste! You've got this! Break down big goals into smaller steps, focus on progress, not perfection. Celebrate small wins & learn from setbacks. Believe in yourself, take the leap!\""
+        },
+        {
+            "question": "hey i'm baptiste",
+            "response": "\"Hey Baptiste! What's holding you back from achieving your dreams? Is it fear, self-doubt or procrastination? Let's tackle those obstacles together and create a plan to make your goals a reality!\""
+        },
+        {
+            "question": "what s my name",
+            "response": "Your name is Baptiste. We just had that conversation earlier!"
         }
     ]
 }
