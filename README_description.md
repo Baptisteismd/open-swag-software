@@ -1,4 +1,4 @@
-# **MetAI Reader** 🌟  
+# **Open source software project : MetAI Reader**  
 ### **An Interactive and Immersive AI Application**  
 
 MetAI Reader is an innovative artificial intelligence application designed to offer a personalized and engaging user experience. It leverages cutting-edge technologies to allow users to interact with the AI naturally. Through a user-friendly interface and immersive voice synthesis, MetAI Reader adapts its responses based on the role chosen by the user, making every interaction unique and dynamic.  
