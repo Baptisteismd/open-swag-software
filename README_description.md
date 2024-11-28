@@ -50,6 +50,7 @@ Its clean, intuitive design ensures a smooth and enjoyable experience.
 
 ## **Technical Architecture**  
 MetAI Reader is built on a robust and modular architecture to ensure extensibility and easy maintenance.  
+![Description de l'image](https://i.imgur.com/HMEoG5V.png)
 
 - **Flask Backend**: A lightweight Python framework that handles user requests, model interactions, and conversation context.  
 - **Ollama Library**: Simplifies interaction with the **llama3.2:3b** language model, enabling efficient and contextually relevant response generation.  
