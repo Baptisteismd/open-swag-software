@@ -33,9 +33,9 @@ Each role (friend, girlfriend, coach) comes with predefined directives, allowing
 ## **Voice Synthesis**  
 Voice synthesis adds an auditory dimension to the user experience, with tailored voices for each role:  
 - **Friend**: Warm and casual, ideal for friendly chats.
-![Friend Personality](https://i.imgur.com/AMK7NZp.png)
 - **Girlfriend**: Empathetic and caring, suited for personal conversations.  
 - **Coach**: Motivational and direct, offering encouragement and advice.
+  ![Friend Personality](https://i.imgur.com/AMK7NZp.png)
 
 ---
 
