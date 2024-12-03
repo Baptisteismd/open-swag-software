@@ -45,7 +45,7 @@ The Java-based graphical user interface (GUI) enables users to:
 ![Selection of Roles](https://i.imgur.com/626VXOF.png)
 - View conversations in real time.  
 - Listen to AI responses through voice synthesis.
-- Remeber last responses
+- Remember last responses
 ![Responses](https://i.imgur.com/uNqgYzu.png)   
 
 Its clean, intuitive design ensures a smooth and enjoyable experience.  
