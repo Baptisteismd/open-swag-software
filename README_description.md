@@ -16,7 +16,7 @@ MetAI Reader consists of several interconnected modules:
 ### **Team Contributions**  
 - **Hugo Virasak**: Integrated voice synthesis and detailed project documentation.  
 - **Baptiste**: Optimized the backend with Flask and response generation.  
-- **Théo Koehler**: Designed the Java interface for seamless interaction.  
+- **Théo Koehler**: Designed the React interface for seamless interaction.  
 - **Margaux Girona**: Worked on bridging the AI responses with the user interface for smooth conversational flow.  
 
 ---
@@ -40,7 +40,8 @@ Voice synthesis adds an auditory dimension to the user experience, with tailored
 ---
 
 ## **User Interface**  
-The Java-based graphical user interface (GUI) enables users to:  
+We wanted to add a graphical interface to our project to improve our proposal. 
+This would enable the user to intuitively carry out the different offers of our application.
 - Select roles easily.
 ![Selection of Roles](https://i.imgur.com/626VXOF.png)
 - View conversations in real time.  
