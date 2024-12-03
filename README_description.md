@@ -60,7 +60,7 @@ MetAI Reader is built on a robust and modular architecture to ensure extensibili
 - **Ollama Library**: Simplifies interaction with the **llama3.2:3b** language model, enabling efficient and contextually relevant response generation.  
 - **JSON Conversation History**: Maintains a lightweight, easily manageable log of the last five exchanges to provide continuity.  
 - **Voice Synthesis**: Converts text responses into audio, making interactions more natural and accessible.  
-- **Java GUI**: Offers an interactive and intuitive platform for users to interact with the AI in real time.  
+- **React GUI**: Delivers an interactive and intuitive platform for users to engage with the AI in real time, leveraging modern JavaScript libraries for a seamless experience.
 
 ---
 
@@ -71,8 +71,8 @@ MetAI Reader combines several modern and proven technologies:
 Flask, a lightweight web framework, powers the backend. It manages user requests, AI interactions, and conversation continuity, making it ideal for rapid development and integration.  
 ![cc](https://i.imgur.com/xKYQHrQ.png)
 
-### **Java**  
-Java powers the GUI, ensuring a stable and interactive user experience. Its robustness and extensive library support make it perfect for creating intuitive interfaces.  
+### **JavaScript React**  
+JavaScript React powers the GUI, ensuring a dynamic and interactive user experience. Its flexibility and rich ecosystem of libraries make it ideal for building modern and intuitive interfaces.
 ![cc](https://i.imgur.com/8yg0OtU.png)
 ### **Ollama**  
 The Ollama library integrates advanced language models like **llama3.2:3b** seamlessly, generating accurate and context-aware responses efficiently.  
@@ -95,7 +95,7 @@ We used the IDE VSCode to run the back-end in Python and the front-end in JavaSc
 ## **Development & Testing**  
 Development was divided into key phases:  
 1. Building the Flask backend for centralized interactions.  
-2. Designing the intuitive Java GUI.  
+2. Designing the intuitive React GUI.  
 3. Integrating the AI and UI for seamless two-way communication.  
 4. Testing and optimizing response relevance and interaction fluidity.  
 
