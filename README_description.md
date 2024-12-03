@@ -85,7 +85,7 @@ This feature converts text into speech, enriching user interaction with personal
 Git and GitHub manage source code, track changes, and facilitate team collaboration, ensuring version control and project transparency.  
 
 ### **Development Environments**  
-Tools like Spyder and PyCharm support Python backend development, while IntelliJ and Eclipse streamline Java interface design and debugging.  
+We used the IDE VSCode to run the back-end in Python and the front-end in JavaScript.
 ![cc](https://i.imgur.com/8yg0OtU.png)
 ![cc](https://i.imgur.com/xKYQHrQ.png)
 
