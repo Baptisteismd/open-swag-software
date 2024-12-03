@@ -32,17 +32,21 @@ Each role (friend, girlfriend, coach) comes with predefined directives, allowing
 
 ## **Voice Synthesis**  
 Voice synthesis adds an auditory dimension to the user experience, with tailored voices for each role:  
-- **Friend**: Warm and casual, ideal for friendly chats.  
+- **Friend**: Warm and casual, ideal for friendly chats.
+![Friend Personality](https://i.imgur.com/AMK7NZp.png)
 - **Girlfriend**: Empathetic and caring, suited for personal conversations.  
-- **Coach**: Motivational and direct, offering encouragement and advice.  
+- **Coach**: Motivational and direct, offering encouragement and advice.
 
 ---
 
 ## **User Interface**  
 The Java-based graphical user interface (GUI) enables users to:  
-- Select roles easily.  
+- Select roles easily.
+![Selection of Roles](https://i.imgur.com/626VXOF.png)
 - View conversations in real time.  
-- Listen to AI responses through voice synthesis.  
+- Listen to AI responses through voice synthesis.
+- Remeber last responses
+![Responses](https://i.imgur.com/uNqgYzu.png)   
 
 Its clean, intuitive design ensures a smooth and enjoyable experience.  
 
@@ -82,6 +86,8 @@ Git and GitHub manage source code, track changes, and facilitate team collaborat
 
 ### **Development Environments**  
 Tools like Spyder and PyCharm support Python backend development, while IntelliJ and Eclipse streamline Java interface design and debugging.  
+![cc](https://i.imgur.com/8yg0OtU.png)
+![cc](https://i.imgur.com/xKYQHrQ.png)
 
 ---
 
