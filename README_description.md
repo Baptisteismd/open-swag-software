@@ -68,10 +68,11 @@ MetAI Reader combines several modern and proven technologies:
 
 ### **Python (Flask)**  
 Flask, a lightweight web framework, powers the backend. It manages user requests, AI interactions, and conversation continuity, making it ideal for rapid development and integration.  
+![cc](https://i.imgur.com/xKYQHrQ.png)
 
 ### **Java**  
 Java powers the GUI, ensuring a stable and interactive user experience. Its robustness and extensive library support make it perfect for creating intuitive interfaces.  
-
+![cc](https://i.imgur.com/8yg0OtU.png)
 ### **Ollama**  
 The Ollama library integrates advanced language models like **llama3.2:3b** seamlessly, generating accurate and context-aware responses efficiently.  
 
@@ -86,8 +87,7 @@ Git and GitHub manage source code, track changes, and facilitate team collaborat
 
 ### **Development Environments**  
 We used the IDE VSCode to run the back-end in Python and the front-end in JavaScript.
-![cc](https://i.imgur.com/8yg0OtU.png)
-![cc](https://i.imgur.com/xKYQHrQ.png)
+
 
 ---
 
