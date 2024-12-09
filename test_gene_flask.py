@@ -42,6 +42,17 @@ def sauvegarder_conversations(conversations):
     with open(nom_fichier, 'w') as fichier:
         json.dump(conversations, fichier, indent=4)
 
+@app.route('/clear_conversations', methods=['POST'])
+def clear_conversations():
+    try:
+        conversations_file = 'conversations.json'
+        if os.path.exists(conversations_file):
+            with open(conversations_file, 'w') as file:
+                file.write('')  # Clear the file content
+        return jsonify({'message': 'Conversations cleared successfully.'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 # API Flask to generate a response
 @app.route('/generate', methods=['POST'])
 def generate_response():

@@ -15,6 +15,16 @@ const CoachChatBot = () => {
     }
   }, [messages]);
 
+  const clearConversations = async () => {
+    try {
+      await fetch('http://127.0.0.1:5000/clear_conversations', {
+        method: 'POST',
+      });
+    } catch (error) {
+      console.error('Error clearing conversations:', error);
+    }
+  };
+
   // Fonction pour envoyer un message à l'API Flask
   const handleSendMessage = async () => {
     if (input.trim()) {
@@ -118,7 +128,7 @@ const CoachChatBot = () => {
   // code html
   return (
     <div className="chatbot-wrapper">
-      <button onClick={() => navigate('/')} className="back-button">
+      <button onClick={() =>{clearConversations(); navigate('/')}} className="back-button">
         Back to Homepage
       </button>
       <h1 className="chatbot-title">CoachChatBot</h1>
