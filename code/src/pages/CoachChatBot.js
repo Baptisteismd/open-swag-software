@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 const CoachChatBot = () => {
   const navigate = useNavigate();
-  const [messages, setMessages] = useState([]); // Historique des messages
-  const [input, setInput] = useState(''); // Contenu de l'input
-  const chatDisplayRef = useRef(null); // Référence pour le défilement
+  const [messages, setMessages] = useState([]); // Message history
+  const [input, setInput] = useState(''); // Input content
+  const chatDisplayRef = useRef(null); // Scroll reference
 
-  // Défilement automatique vers le bas
+  //  Automatic scrolling down
   useEffect(() => {
     if (chatDisplayRef.current) {
       chatDisplayRef.current.scrollTop = chatDisplayRef.current.scrollHeight;
@@ -25,36 +25,36 @@ const CoachChatBot = () => {
     }
   };
 
-  // Fonction pour envoyer un message à l'API Flask
+  // Function to send a message to the Flask API
   const handleSendMessage = async () => {
     if (input.trim()) {
-      // Ajouter le message utilisateur
+      //  Add user message
       setMessages([...messages, { text: input, user: true }]);
-      setInput(''); // Réinitialiser le champ input
+      setInput(''); // Reset input field
 
       try {
-        // Requête POST vers Flask
+        // POST request to Flask
         const response = await fetch('http://127.0.0.1:5000/generate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            role: 'Coach', // Rôle ou contexte du bot
+            role: 'Coach', // Bot role or context
             prompt: input,
           }),
         });
 
         const data = await response.json();
 
-        // Ajouter la réponse du bot
+        // Add bot response
         if (data.response) {
           setMessages((prevMessages) => [
             ...prevMessages,
             { text: data.response, user: false },
           ]);
 
-          // nouvelle ligne : déclencher le text-to-speech pour la réponse du coach
+          // new line: trigger text-to-speech for coach's response
           speakCoachResponse(data.response);
 
         } else if (data.error) {
@@ -64,40 +64,40 @@ const CoachChatBot = () => {
           ]);
         }
       } catch (error) {
-        // Gérer les erreurs de connexion et variable errorMessage ajouté pour éviter la répétition du message.
+        // Manage connection errors and errorMessage variable added to prevent message repetition.
         const errorMessage = '오류가 발생했습니다: 서버에 연결할 수 없습니다.'//'connexion sans succès' //Error: Unable to connect to the server.
         setMessages((prevMessages) => [
           ...prevMessages,
           { text: errorMessage, user: false }, 
         ]);
-        // Nouvelle ligne ajoutée pour tester la voix en cas d'erreur : Speak the error message
+        // New line added to test voice in case of error: Speak the error message
         speakCoachResponse(errorMessage); 
       }
     }
   };
 
-  // Gestion de la touche "Entrée" pour envoyer un message
+  // Use the “Enter” key to send a message
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       handleSendMessage();
     }
   };
 
-  // nouvelles fonctions pour le text-to-speech
+  // new functions for text-to-speech
   
-  // fonction pour détecter la langue utilisée par la réponse générée
+  // function to detect the language used by the generated response
   const detectLanguage = (text) => 
   {
     if (/[\u3131-\uD79D]/.test(text)) return 'ko-KR'; // pour reconnaître le coréen
     if (/\b(le|la|les|un|une|des|je|tu|il|elle|nous|vous|ils|elles|et|est|sont|pas|pour|avec|sans|cette|cela|ceci|au|aux|du|de|que|qui|où|quoi|quand|comment|parce|mais|ou|donc|or|ni|car|bientôt|fête|bonjour|merci|ça)\b|[àâçéèêëîïôûùüÿæœ]/i.test(text)) {
       return 'fr-FR';}
-  // pour reconnaître le français
-    return 'en-US'; // s'il n'y a d'autres langues configurées, mettons l'anglais par défaut
+  // to recognize French
+    return 'en-US'; // if no other languages are configured, default to English
   }
-  // fonction text-to-speech (TTS) pour la voix du coach
+   // text-to-speech (TTS) function for coach's voice
   const speakCoachResponse = (text) => {
     const synth = window.speechSynthesis;
-    const lang = detectLanguage(text); // appel de la fonction detectLanguage
+    const lang = detectLanguage(text); // call the detectLanguage function
 
     const loadAndSpeak = () => {
       const voices = synth.getVoices();
@@ -154,7 +154,7 @@ const CoachChatBot = () => {
         <button
           onClick={handleSendMessage}
           className="send-button"
-          disabled={!input.trim()} // Désactiver le bouton si le champ est vide
+          disabled={!input.trim()} // Disable the button if the field is empty
         >
           Send
         </button>
