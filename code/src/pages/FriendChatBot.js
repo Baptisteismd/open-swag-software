@@ -4,16 +4,17 @@ import { useNavigate } from 'react-router-dom';
 
 const FriendChatBot = () => {
   const navigate = useNavigate();
-  const [messages, setMessages] = useState([]); // Historique des messages
-  const [input, setInput] = useState(''); // Contenu de l'input
-  const chatDisplayRef = useRef(null); // Référence pour le défilement
+  const [messages, setMessages] = useState([]); // Message history
+  const [input, setInput] = useState(''); // Input field content
+  const chatDisplayRef = useRef(null); // Reference for auto-scrolling
 
-  // Défilement automatique vers le bas
+  // Automatically scroll to the bottom
   useEffect(() => {
     if (chatDisplayRef.current) {
       chatDisplayRef.current.scrollTop = chatDisplayRef.current.scrollHeight;
     }
   }, [messages]);
+  
   const clearConversations = async () => {
     try {
       await fetch('http://127.0.0.1:5000/clear_conversations', {
@@ -23,36 +24,37 @@ const FriendChatBot = () => {
       console.error('Error clearing conversations:', error);
     }
   };
-  // Fonction pour envoyer un message à l'API Flask
+  
+  // Function to send a message to the Flask API
   const handleSendMessage = async () => {
     if (input.trim()) {
-      // Ajouter le message utilisateur
+      // Add the user message
       setMessages([...messages, { text: input, user: true }]);
-      setInput(''); // Réinitialiser le champ input
+      setInput(''); // Reset the input field
 
       try {
-        // Requête POST vers Flask
+        // POST request to Flask
         const response = await fetch('http://127.0.0.1:5000/generate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            role: 'friend', // Rôle ou contexte du bot
+            role: 'friend', // Bot's role or context
             prompt: input,
           }),
         });
 
         const data = await response.json();
 
-        // Ajouter la réponse du bot
+        // Add the bot's response
         if (data.response) {
           setMessages((prevMessages) => [
             ...prevMessages,
             { text: data.response, user: false },
           ]);
 
-          // nouvelle ligne : déclencher le text-to-speech pour la réponse du coach
+          // New line: Trigger text-to-speech for the coach's response
           speakCoachResponse(data.response);
 
         } else if (data.error) {
@@ -62,40 +64,40 @@ const FriendChatBot = () => {
           ]);
         }
       } catch (error) {
-        // Gérer les erreurs de connexion et variable errorMessage ajouté pour éviter la répétition du message.
-        const errorMessage = '오류가 발생했습니다: 서버에 연결할 수 없습니다.'//'connexion sans succès' //Error: Unable to connect to the server.
+        // Handle connection errors and avoid repetitive error messages
+        const errorMessage = 'Error occurred: Unable to connect to the server.';
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: errorMessage, user: false }, 
+          { text: errorMessage, user: false },
         ]);
-        // Nouvelle ligne ajoutée pour tester la voix en cas d'erreur : Speak the error message
+        // New line added to test the voice on error: Speak the error message
         speakCoachResponse(errorMessage); 
       }
     }
   };
 
-  // Gestion de la touche "Entrée" pour envoyer un message
+  // Handle the "Enter" key to send a message
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       handleSendMessage();
     }
   };
 
-  // nouvelles fonctions pour le text-to-speech
+  // New functions for text-to-speech (TTS)
   
-  // fonction pour détecter la langue utilisée par la réponse générée
-  const detectLanguage = (text) => 
-  {
-    if (/[\u3131-\uD79D]/.test(text)) return 'ko-KR'; // pour reconnaître le coréen
+  // Function to detect the language used in the generated response
+  const detectLanguage = (text) => {
+    if (/[\u3131-\uD79D]/.test(text)) return 'ko-KR'; // For recognizing Korean
     if (/\b(le|la|les|un|une|des|je|tu|il|elle|nous|vous|ils|elles|et|est|sont|pas|pour|avec|sans|cette|cela|ceci|au|aux|du|de|que|qui|où|quoi|quand|comment|parce|mais|ou|donc|or|ni|car|bientôt|fête|bonjour|merci|ça)\b|[àâçéèêëîïôûùüÿæœ]/i.test(text)) {
-      return 'fr-FR';}
-  // pour reconnaître le français
-    return 'en-US'; // s'il n'y a d'autres langues configurées, mettons l'anglais par défaut
-  }
-  // fonction text-to-speech (TTS) pour la voix du coach
+      return 'fr-FR'; // For recognizing French
+    }
+    return 'en-US'; // Default to English if no other languages are detected
+  };
+
+  // Text-to-speech (TTS) function for the coach's voice
   const speakCoachResponse = (text) => {
     const synth = window.speechSynthesis;
-    const lang = detectLanguage(text); // appel de la fonction detectLanguage
+    const lang = detectLanguage(text); // Call the detectLanguage function
 
     const loadAndSpeak = () => {
       const voices = synth.getVoices();
@@ -118,12 +120,12 @@ const FriendChatBot = () => {
       utterance.rate = 1.5;   // Faster rate for dynamic tone
 
       synth.speak(utterance);
+    };
+
+    loadAndSpeak();
   };
 
-  loadAndSpeak();
-  };
-
-  // code html
+  // HTML code
   return (
     <div className="chatbot-wrapper">
       <button onClick={() =>{clearConversations(); navigate('/')}} className="back-button">
@@ -152,7 +154,7 @@ const FriendChatBot = () => {
         <button
           onClick={handleSendMessage}
           className="send-button"
-          disabled={!input.trim()} // Désactiver le bouton si le champ est vide
+          disabled={!input.trim()} // Disable button if the input field is empty
         >
           Send
         </button>
