@@ -15,7 +15,7 @@ MetAI Reader consists of several interconnected modules:
 
 ### **Team Contributions**  
 - **Hugo Virasak**: Integrated voice synthesis and detailed project documentation.  
-- **Baptiste**: Optimized the backend with Flask and response generation.  
+- **Baptiste Ismedon**: Optimized the backend with Flask and response generation.  
 - **Théo Koehler**: Designed the React interface for seamless interaction.  
 - **Margaux Girona**: Worked on bridging the AI responses with the user interface for smooth conversational flow.  
 
@@ -33,7 +33,7 @@ Each role (friend, girlfriend, coach) comes with predefined directives, allowing
 ## **Voice Synthesis**  
 Voice synthesis adds an auditory dimension to the user experience, with tailored voices for each role:  
 - **Friend**: Warm and casual, ideal for friendly chats.
-- **Girlfriend**: Empathetic and caring, suited for personal conversations.  
+- **Teacher**: Empathetic and caring, suited for personal conversations.  
 - **Coach**: Motivational and direct, offering encouragement and advice.
   ![Friend Personality](https://i.imgur.com/AMK7NZp.png)
 
@@ -61,6 +61,7 @@ MetAI Reader is built on a robust and modular architecture to ensure extensibili
 - **JSON Conversation History**: Maintains a lightweight, easily manageable log of the last five exchanges to provide continuity.  
 - **Voice Synthesis**: Converts text responses into audio, making interactions more natural and accessible.  
 - **React GUI**: Delivers an interactive and intuitive platform for users to engage with the AI in real time, leveraging modern JavaScript libraries for a seamless experience.
+- **Web Speech API**: An Javascript API which is used for speech recognition and text-to-speech functionalities.
 
 ---
 
@@ -81,7 +82,7 @@ The Ollama library integrates advanced language models like **llama3.2:3b** seam
 JSON stores conversation history, ensuring continuity between exchanges while maintaining a lightweight and fast data format.  
 
 ### **Voice Synthesis**  
-This feature converts text into speech, enriching user interaction with personalized voices for each role.  
+This feature converts text into speech, enriching user interaction with personalized voices for each role, with the Web Speech API.
 
 ### **Git & GitHub**  
 Git and GitHub manage source code, track changes, and facilitate team collaboration, ensuring version control and project transparency.  
@@ -106,6 +107,7 @@ MetAI Reader demonstrates our vision for more human-like AI interactions. By com
 
 We hope MetAI Reader opens new possibilities for immersive and personalized AI interactions.
 
+## **Bibliography**
 
-
-[about pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+[About pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+[Web Speech API informations](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API)
