@@ -160,7 +160,7 @@ const TeacherChatBot = () => {
       <button onClick={() => { clearConversations(); navigate('/'); }} className="back-button">
         Back to Homepage
       </button>
-      <h1 className="chatbot-title">CoachChatBot</h1>
+      <h1 className="chatbot-title">TeacherChatBot</h1>
       <div className="chat-display" ref={chatDisplayRef}>
         {messages.map((msg, index) => (
           <div
