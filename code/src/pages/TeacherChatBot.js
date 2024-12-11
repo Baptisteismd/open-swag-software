@@ -7,6 +7,7 @@ const TeacherChatBot = () => {
   const [messages, setMessages] = useState([]); // Message history
   const [input, setInput] = useState(''); // Input field content
   const chatDisplayRef = useRef(null); // Reference for scrolling
+  const [listening, setListening] = useState(false); // Listening status for speech-to-text
 
   // Automatically scroll to the bottom
   useEffect(() => {
@@ -63,7 +64,7 @@ const TeacherChatBot = () => {
         }
       } catch (error) {
         // Handle connection errors and avoid repetitive error messages
-        const errorMessage = 'Error occurred: Unable to connect to the server.';
+        const errorMessage = 'Error: Unable to connect to the server. 오류가 발생했습니다: 서버에 연결할 수 없습니다.';
         setMessages((prevMessages) => [
           ...prevMessages,
           { text: errorMessage, user: false },
@@ -114,8 +115,8 @@ const TeacherChatBot = () => {
 
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.voice = coachVoice;
-      utterance.pitch = 5.0;  // High pitch for motivation
-      utterance.rate = 1.5;   // Faster rate for dynamic tone
+      utterance.pitch = 0.5;  // Low pitch for the teaching's explanation
+      utterance.rate = 0.8;   // Lower rate for a deeper tone of voice
 
       synth.speak(utterance);
   };
@@ -123,13 +124,43 @@ const TeacherChatBot = () => {
   loadAndSpeak();
   };
 
+  // Speech-to-text functionality
+  const handleSpeechToText = () => {
+    const recognition = new window.webkitSpeechRecognition() || new window.SpeechRecognition();
+    
+    // Automatically set the language based on user's preference or detected language
+    const preferredLanguage = detectLanguage(input || ''); // Use detected language from input or default to English
+    recognition.lang = preferredLanguage; // Set language dynamically 
+    recognition.interimResults = false;
+  
+    recognition.onstart = () => {
+      setListening(true);
+    };
+  
+    recognition.onend = () => {
+      setListening(false);
+    };
+  
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+      setListening(false);
+    };
+  
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(transcript); // Update the input field with the recognized text
+    };
+  
+    recognition.start();
+  };
+
   // HTML code
   return (
     <div className="chatbot-wrapper">
-      <button onClick={() =>{clearConversations(); navigate('/')}} className="back-button">
+      <button onClick={() => { clearConversations(); navigate('/'); }} className="back-button">
         Back to Homepage
       </button>
-      <h1 className="chatbot-title">TeacherChatBot</h1>
+      <h1 className="chatbot-title">CoachChatBot</h1>
       <div className="chat-display" ref={chatDisplayRef}>
         {messages.map((msg, index) => (
           <div
@@ -150,9 +181,16 @@ const TeacherChatBot = () => {
           className="chat-input"
         />
         <button
+          onClick={handleSpeechToText}
+          className="microphone-button"
+          disabled={listening} // Disable if already listening
+        >
+          🎤
+        </button>
+        <button
           onClick={handleSendMessage}
           className="send-button"
-          disabled={!input.trim()} // Disable the button if the input field is empty
+          disabled={!input.trim()}
         >
           Send
         </button>
