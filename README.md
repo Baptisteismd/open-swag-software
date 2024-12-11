@@ -83,7 +83,7 @@ The Ollama library integrates advanced language models like **llama3.2:3b** seam
 JSON stores conversation history, ensuring continuity between exchanges while maintaining a lightweight and fast data format.  
 
 ### **Voice Synthesis**  
-This feature converts text into speech, enriching user interaction with personalized voices for each role, with the Web Speech API.
+This feature converts text into speech and speech to text, enriching user interaction with personalized voices for each role, with the Web Speech API.
 
 ### **Git & GitHub**  
 Git and GitHub manage source code, track changes, and facilitate team collaboration, ensuring version control and project transparency.  
@@ -113,6 +113,10 @@ We hope MetAI Reader opens new possibilities for immersive and personalized AI i
 ---
 
 ## **Bibliography**
+
+We used generative AIs like chatGPT to help us improve our codes.
+
+[Lama AI](https://www.lama.ai/)
 
 [About pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 
