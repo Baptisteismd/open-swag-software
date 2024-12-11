@@ -26,7 +26,7 @@ At its core, MetAI Reader uses the **llama3.2:3b** model via the Ollama library 
 
 A Flask API acts as a central hub, managing communication between the graphical interface and the AI model while maintaining a JSON-based record of the last five exchanges to ensure contextual continuity.  
 
-Each role (friend, girlfriend, coach) comes with predefined directives, allowing the AI to adopt the appropriate tone and style for each interaction.  
+Each role (friend, teacher, coach) comes with predefined directives, allowing the AI to adopt the appropriate tone and style for each interaction.  
 
 ---
 
@@ -42,6 +42,7 @@ Voice synthesis adds an auditory dimension to the user experience, with tailored
 ## **User Interface**  
 We wanted to add a graphical interface to our project to improve our proposal. 
 This would enable the user to intuitively carry out the different offers of our application.
+**Please use Microsoft Edge** to be sure that the chatbot works perfectly.
 - Select roles easily.
 ![Selection of Roles](https://i.imgur.com/626VXOF.png)
 - View conversations in real time.  
