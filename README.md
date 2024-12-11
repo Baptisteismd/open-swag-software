@@ -92,7 +92,7 @@ Git and GitHub manage source code, track changes, and facilitate team collaborat
 We used the IDE VSCode to run the back-end in Python and the front-end in JavaScript.
 
 ### **Simulation video**
-Here is a video to simulate our interface : [Chatbot simulation](bandicam 2024-12-11 23-59-57-408.mp4)
+Here is a video to simulate our interface : [Chatbot simulation](https://github.com/Baptisteismd/open-swag-software/blob/d6eaeea872f0e3ee1e1070a93e83ee9563766559/bandicam%202024-12-11%2023-59-57-408.mp4))
 
 ---
 
