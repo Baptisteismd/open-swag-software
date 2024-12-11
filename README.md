@@ -107,7 +107,10 @@ MetAI Reader demonstrates our vision for more human-like AI interactions. By com
 
 We hope MetAI Reader opens new possibilities for immersive and personalized AI interactions.
 
+---
+
 ## **Bibliography**
 
 [About pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+
 [Web Speech API informations](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API)
